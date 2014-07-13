@@ -19,3 +19,13 @@
 *.exe
 *.out
 *.app
+
+# mac useless doc
+.DS_Store
+
+# mac debug directory
+*.dSYM
+
+# data input & output
+*.in
+*.out
