@@ -12,8 +12,7 @@ LANG: C++11
 
 bool IsBisquary[2 * MAXM * MAXM];
 
-int main()
-{
+int main() {
 	freopen("ariprog.in", "r", stdin);
 	freopen("ariprog.out", "w", stdout);
 
