@@ -4,6 +4,25 @@ PROG: camelot
 LANG: C++11
 */
 
+/*
+ * This is my original idea. First we use BFS to calculate the shortest path
+ * between any two square. Let n = rc, then the cost is O(n^2).
+ * The next step is to decide which knight to pick up the king and where 
+ * they should meet and where all knights and king should gather.
+ * At the beginning I try to enumerate the gather square and king-knight meet
+ * proxy, this will cost O(n^3) and resulted in a TLE.
+ * Still I will need to enumerate all the gather square and decide which knight
+ * to pick up the king, but I can be smart with the proxy that the king and knight
+ * meet. So for a square, if it costs the king a moves to get there, and it costs
+ * the knight b moves to get from the proxy square to the king's original locaction,
+ * if a >= b, meaning move the king to the proxy and let the knight to pick it up
+ * at that proxy will at least not costing anything extra.
+ * So for those squares with a >= b, they're possible proxies.
+ * So with this I enumerate the knight to pick up the king, the square to gather,
+ * the square as proxy, I solve this problem, the cost is O(kn^2), where k is
+ * somewhat less then 25.
+ */
+
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
