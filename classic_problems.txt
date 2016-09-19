@@ -2,3 +2,5 @@ usaco sec 3.3 game1 - DP, game theory
 hihocoder 1048 - State Compression DP
 hihocoder 1049 - Classic pre/in/post order problem
 hihocoder 1053 - binary enumation. Tricky
+nowcoder tx 2017 intern Q1 - DP
+nowcoder tx 2017 intern Q2 - Typical interview question: clever trick
