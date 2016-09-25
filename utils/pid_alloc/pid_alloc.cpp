@@ -50,6 +50,6 @@ int allocate_pid(void) {
 
 void release_pid(int pid) {
 	if (pthread_mutex_lock(&lock) != 0) { return ; }
-	pidmap[pid] = false;
+	pidmap[pid-MIN_PID] = false;
 	pthread_mutex_unlock(&lock);
 }
