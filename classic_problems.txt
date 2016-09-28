@@ -4,3 +4,4 @@ hihocoder 1049 - Classic pre/in/post order problem
 hihocoder 1053 - binary enumation. Tricky
 nowcoder tx 2017 intern Q1 - DP
 nowcoder tx 2017 intern Q2 - Typical interview question: clever trick
+hihocoder 1063 - Tree DP, backpack, modeling.
