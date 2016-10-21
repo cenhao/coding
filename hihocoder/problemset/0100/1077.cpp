@@ -4,7 +4,7 @@ using namespace std;
 #include <stdio.h>
 #include <string.h>
 
-#define MAXN 10000
+#define MAXN 1000000
 
 int w[MAXN+1];
 
