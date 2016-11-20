@@ -11,3 +11,4 @@ leetcode 10 - DP, LCS
 leetcode 173 - iterator for binary search tree
 leetcode 446 - DP
 hihocoder 1417 - bitwise operation
+leetcode 462 - enumeration: find the minimum move(+/-1 for one element) the make the array elements the same
