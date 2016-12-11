@@ -6,6 +6,7 @@ using namespace std;
 class Solution {
 	public:
 	string validIPAddress(string IP) {
+		static char buff[32768];
 		int cdot = 0;
 		int ccol = 0;
 		bool haschar = false;
@@ -31,14 +32,13 @@ class Solution {
 			return "Neither";
 		}
 
-		char buff[170];
 		if (cdot) {
 			sprintf(buff, "%s", IP.c_str());
 			char *tmp = buff;
 			char *seg;
 			while (seg = strtok(tmp, ".")) {
 				tmp = NULL;
-				if (seg[0] == '0' && seg[1] != 0) {
+				if ((seg[0] == '0' && seg[1] != 0) || strlen(seg) > 3) {
 					return "Neither";
 				}
 				int v;
