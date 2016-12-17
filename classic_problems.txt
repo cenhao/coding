@@ -15,3 +15,4 @@ leetcode 462 - enumeration: find the minimum move(+/-1 for one element) the make
 leetcode 465 - state dp, bitwise operation, modeling
 hihocoder 1368 - Interesting BFS, compress the graph to smaller one
 leetcode 466 - binary DP?
+hihocoder 1125 - Greedy, interesting backward merging approach
