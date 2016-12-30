@@ -16,3 +16,4 @@ leetcode 465 - state dp, bitwise operation, modeling
 hihocoder 1368 - Interesting BFS, compress the graph to smaller one
 leetcode 466 - binary DP?
 hihocoder 1125 - Greedy, interesting backward merging approach
+hihocoder 1448 - Greedy, interesting modling and queue
