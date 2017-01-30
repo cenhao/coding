@@ -18,3 +18,4 @@ leetcode 466 - binary DP?
 hihocoder 1125 - Greedy, interesting backward merging approach
 hihocoder 1448 - Greedy, interesting modling and queue
 leetcode 480 - double heap, hash table
+leetcode 483 - interesting binary search
