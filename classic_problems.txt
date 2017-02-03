@@ -20,3 +20,4 @@ hihocoder 1448 - Greedy, interesting modling and queue
 leetcode 480 - double heap, hash table
 leetcode 483 - interesting binary search
 leetcode 138 - copy linked list with random pointer, 3 pass
+leetcode 116, 117 - level traversal tree
