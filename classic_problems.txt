@@ -22,3 +22,4 @@ leetcode 483 - interesting binary search
 leetcode 138 - copy linked list with random pointer, 3 pass
 leetcode 116, 117 - level traversal tree
 hacker rank - 101 hack 46 - lena sort - binary search
+leetcode 517 - modeling
