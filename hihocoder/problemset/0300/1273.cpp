@@ -24,10 +24,11 @@ int dfs(int start, int end) {
 }
 
 int main() {
-	int n, w, h; scanf("%d %d %d", &w, &h, &n);
-
 	memset(cover, 0, sizeof(cover));
 	memset(conn, 0, sizeof(conn));
+
+	int n, w, h; scanf("%d %d %d", &w, &h, &n);
+
 	for (int i=0; i<n; ++i) {
 		scanf("%d %d %d %d", &x[i][0], &y[i][0], &x[i][1], &y[i][1]);
 		for (int j=i-1; j>=0; --j) {

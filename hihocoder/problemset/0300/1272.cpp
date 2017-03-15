@@ -4,8 +4,7 @@ using namespace std;
 #define MAXN 50
 
 struct Snack {
-	int desire;
-	int price;
+	int desire, price;
 } sn[MAXN];
 
 int dfs(int start, int psum, int dsum, int cnt, int end) {
