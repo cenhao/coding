@@ -74,5 +74,6 @@ int main() {
 	}
 
 	printf("%s\n", cnt[0] > cnt[1] ? "second" : "first");
+
 	return 0;
 }
