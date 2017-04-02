@@ -29,3 +29,4 @@ leetcode 1475 - dp
 hihocode 1483 - numeric, binary search, double pointers
 leetcode 546 - dp
 hihocoder 1488 - offline binary indexed tree + partitioning
+leetcode 521 - super simple problem, but I almost failed it
