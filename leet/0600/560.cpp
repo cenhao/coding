@@ -1,0 +1,16 @@
+class Solution {
+public:
+	int subarraySum(vector<int>& nums, int k) {
+		int sum = 0, ans = 0;
+		unordered_map<int, int> hm;
+		hm[0] = 1;
+
+		for (int i=0; i<nums.size(); ++i) {
+			sum += nums[i];
+			ans += hm[sum-k];
+			++hm[sum];
+		}
+
+		return ans;
+	}
+};
