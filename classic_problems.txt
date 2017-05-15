@@ -32,3 +32,4 @@ hihocoder 1488 - offline binary indexed tree + partitioning
 leetcode 521 - super simple problem, but I almost failed it
 hihocoder 1490 - dfs, enumeration
 google codejam 2017 qr A - modeling, greedy, constructive
+leetcode 587 - Convex hull, graham scan
