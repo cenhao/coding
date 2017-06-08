@@ -34,3 +34,4 @@ hihocoder 1490 - dfs, enumeration
 google codejam 2017 qr A - modeling, greedy, constructive
 leetcode 587 - Convex hull, graham scan
 cf 808e - dp, backpack
+leetcode 31 - greedy, constructive
