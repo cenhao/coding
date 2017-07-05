@@ -36,3 +36,4 @@ leetcode 587 - Convex hull, graham scan
 cf 808e - dp, backpack
 leetcode 31 - greedy, constructive
 leetcode 630 - greedy
+leetcode 41 - greedy, brain teaser
