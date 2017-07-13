@@ -37,3 +37,4 @@ cf 808e - dp, backpack
 leetcode 31 - greedy, constructive
 leetcode 630 - greedy
 leetcode 41 - greedy, brain teaser
+codeforces 811b - segment forest :) or segment tree or brute force
