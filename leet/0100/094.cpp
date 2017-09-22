@@ -1,26 +1,24 @@
-#include <cstdlib>
-#include <vector>
-using namespace std;
-
-struct TreeNode {
-	int val;
-	TreeNode *left;
-	TreeNode *right;
-	TreeNode(int x) : val(x), left(NULL), right(NULL) {}
-};
-
 class Solution {
-	public:
-		vector<int> inorderTraversal(TreeNode* root) {
-			vector<int> result;
-			inorder(root, result);
-			return result;
+public:
+	vector<int> inorderTraversal(TreeNode* root) {
+		vector<int> ans;
+		stack<TreeNode*> st;
+		TreeNode *cur = root;
+		while (cur != nullptr) {
+			st.push(cur);
+			cur = cur->left;
 		}
 
-		void inorder(TreeNode* node, vector<int> &result) {
-			if (node == NULL) { return ; }
-			inorder(node->left, result);
-			result.push_back(node->val);
-			inorder(node->right, result);
+		while (!st.empty()) {
+			cur = st.top(); st.pop();
+			ans.push_back(cur->val);
+			cur = cur->right;
+			while (cur != nullptr) {
+				st.push(cur);
+				cur = cur->left;
+			}
 		}
+
+		return ans;
+	}
 };
