@@ -15,29 +15,16 @@ public:
 			return;
 		}
 
-		if (v <= cur->val) {
-			generate(cur->left, tmp, v);
-			for (auto &ptr : tmp) {
-				TreeNode *nptr = new TreeNode(cur->val);
-				nptr->left = ptr;
-				nptr->right = cur->right;
-				ptr = nptr;
-			}
-			TreeNode *nptr = new TreeNode(v);
-			nptr->right = cur;
-			tmp.push_back(nptr);
-		} else {
-			generate(cur->right, tmp, v);
-			for (auto &ptr : tmp) {
-				TreeNode *nptr = new TreeNode(cur->val);
-				nptr->left = cur->left;
-				nptr->right = ptr;
-				ptr = nptr;
-			}
-			TreeNode *nptr = new TreeNode(v);
-			nptr->left = cur;
-			tmp.push_back(nptr);
+		generate(cur->right, tmp, v);
+		for (auto &ptr : tmp) {
+			TreeNode *nptr = new TreeNode(cur->val);
+			nptr->left = cur->left;
+			nptr->right = ptr;
+			ptr = nptr;
 		}
+		TreeNode *nptr = new TreeNode(v);
+		nptr->left = cur;
+		tmp.push_back(nptr);
 	}
 
 	vector<TreeNode*> generateTrees(int n) {
