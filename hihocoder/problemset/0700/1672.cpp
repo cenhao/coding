@@ -57,7 +57,11 @@ int main() {
 	}
 
 	sort(itvs, itvs+n, [](const Interval &i1, const Interval &i2) {
-		return i1.r < i2.r;
+		// ordering is important
+		// for data like [1, 2], [2, 5], [4, 5]
+		// tho the result is right, the segment tree is actually wrong.
+		// refer to leetcode 759
+		return i1.r == i2.r ? i1.l > i2.l : i1.r < i2.r;
 	});
 	build(1, mn, mx);
 
