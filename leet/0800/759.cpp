@@ -1,36 +1,46 @@
+/**
+ * Definition for an interval.
+ * struct Interval {
+ * int start;
+ * int end;
+ * Interval() : start(0), end(0) {}
+ * Interval(int s, int e) : start(s), end(e) {}
+ * };
+ */
 class Solution {
 public:
-	int intersectionSizeTwo(vector<vector<int>>& itvs) {
-		sort(itvs.begin(), itvs.end(), [](const vector<int> &v1, const vector<int> &v2) {
-			// ordering with r and l is necessary
-			return (v1[1] == v2[1]) ? v1[0] > v2[0] : v1[1] < v2[1];
-		});
+    vector<Interval> employeeFreeTime(vector<vector<Interval>>& a) {
+		int sz = a.size();
+		auto cmp = [](const Interval &i1, const Interval &i2) {
+			return i1.end < i2.start;
+		};
 
-		set<int> sm;
-		for (auto &p : itvs) {
-			auto it = sm.lower_bound(p[0]);
-			if (it == sm.end()) {
-				sm.insert(p[1]-1);
-				sm.insert(p[1]);
-			} else if (next(it) == sm.end()) {
-				sm.insert(p[1]);
+		set<Interval, decltype(cmp)> sm(cmp);
+		for (auto &itvs : a) {
+			for (auto &itv : itvs) {
+				auto rng = sm.equal_range(itv);
+				if (rng.first == sm.end() || rng.first->start > itv.end) {
+					sm.insert(itv);
+				} else {
+					auto st = rng.first, ed = prev(rng.second);
+					sm.erase(rng.first, rng.second);
+					int sn = min(itv.start, st->start), en = max(itv.end, ed->end);
+					Interval toin(sn, en);
+					sm.insert(toin);
+				}
 			}
 		}
 
-		return sm.size();
-	}
-};
+		vector<Interval> ans;
+		int pre = -1;
+		for (auto &itv: sm) {
+			if (pre >= 0) {
+				Interval toin(pre, itv.start);
+				ans.push_back(toin);
+			}
+			pre = itv.end;
+		}
 
-// for data like
-// 1 2
-// 2 5
-// 4 5
-// if only ordered by `r`
-// then for the first pair, set has [1, 2]
-// second pair, [1, 2, 5]
-// but for the third, it will try to insert 5 again
-// but in fact it should insert 4 rather.
-//
-// If order by r then l
-// we will insert [1, 2], then [4, 5], ending up
-// with [1, 2, 4, 5], which is the final answer
+		return ans;
+    }
+};

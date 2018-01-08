@@ -1,40 +1,36 @@
 class Solution {
 public:
-	vector<int> pourWater(vector<int>& h, int V, int K) {
-		int sz = h.size();
-		auto fcmp = [&h](int i1, int i2) {
-			return h[i1] == h[i2] ? i1 < i2 : h[i1] > h[i2];
-		};
-		priority_queue<int, vector<int>, decltype(fcmp)> fq(fcmp);
-		auto bcmp = [&h](int i1, int i2) {
-			return h[i1] == h[i2] ? i1 > i2 : h[i1] > h[i2];
-		};
-		priority_queue<int, vector<int>, decltype(bcmp)> bq(bcmp);
-
-		int fi = K-1, bi = K+1;
-		for (int i=0; i<V; ++i) {
-			while (fi >= 0 && h[fi] <= h[K] && (fq.empty() || h[fi] <= h[fq.top()])) {
-				fq.push(fi--);
-			}
-			while (bi < sz && h[bi] <= h[K] && (bq.empty() || h[bi] <= h[bq.top()])) {
-				bq.push(bi++);
-			}
-			int fh = 0x7fff0000, bh = 0x7fff0000;
-			if (!fq.empty()) { fh = h[fq.top()]; }
-			if (!bq.empty()) { bh = h[bq.top()]; }
-			if (fh < h[K]) {
-				int t = fq.top(); fq.pop();
-				++h[t];
-				fq.push(t);
-			} else if (bh < h[K]) {
-				int t = bq.top(); bq.pop();
-				++h[t];
-				bq.push(t);
-			} else {
-				++h[K];
+	bool dfs(vector<string> &b, int cur, unordered_map<string, vector<char>> &hm,
+			 int len, int st) {
+		if (len == 1) { return true; }
+		string key = move(b[cur].substr(st, 2));
+		auto it = hm.find(key);
+		if (it == hm.end()) { return false; }
+		for (auto c : it->second) {
+			b[cur+1][st] = c;
+			if (st == len-2 && dfs(b, cur+1, hm, len-1, 0)) {
+				return true;
+			} else if (dfs(b, cur, hm, len, st+1)) {
+				return true;
 			}
 		}
+		return false;
+	}
+	bool pyramidTransition(string bottom, vector<string>& allowed) {
+		int len = bottom.length(), sz = allowed.size();
+		int need = len * (len-1) / 2;
+		if (need > sz) { return false; }
+		vector<string> b(len, bottom);
+		unordered_map<string, vector<char>> hm;
+		for (auto &a : allowed) {
+			string key = move(a.substr(0, 2));
+			auto it = hm.find(key);
+			if (it == hm.end()) {
+				it = hm.insert(make_pair(key, vector<char>())).first;
+			}
 
-		return h;
+			it->second.push_back(a[2]);
+		}
+		return dfs(b, 0, hm, len, 0);
 	}
 };

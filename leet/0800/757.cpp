@@ -1,36 +1,36 @@
 class Solution {
 public:
-	bool dfs(vector<string> &b, int cur, unordered_map<string, vector<char>> &hm,
-			 int len, int st) {
-		if (len == 1) { return true; }
-		string key = move(b[cur].substr(st, 2));
-		auto it = hm.find(key);
-		if (it == hm.end()) { return false; }
-		for (auto c : it->second) {
-			b[cur+1][st] = c;
-			if (st == len-2 && dfs(b, cur+1, hm, len-1, 0)) {
-				return true;
-			} else if (dfs(b, cur, hm, len, st+1)) {
-				return true;
-			}
-		}
-		return false;
-	}
-	bool pyramidTransition(string bottom, vector<string>& allowed) {
-		int len = bottom.length(), sz = allowed.size();
-		int need = len * (len-1) / 2;
-		if (need > sz) { return false; }
-		vector<string> b(len, bottom);
-		unordered_map<string, vector<char>> hm;
-		for (auto &a : allowed) {
-			string key = move(a.substr(0, 2));
-			auto it = hm.find(key);
-			if (it == hm.end()) {
-				it = hm.insert(make_pair(key, vector<char>())).first;
-			}
+	int intersectionSizeTwo(vector<vector<int>>& itvs) {
+		sort(itvs.begin(), itvs.end(), [](const vector<int> &v1, const vector<int> &v2) {
+			// ordering with r and l is necessary
+			return (v1[1] == v2[1]) ? v1[0] > v2[0] : v1[1] < v2[1];
+		});
 
-			it->second.push_back(a[2]);
+		set<int> sm;
+		for (auto &p : itvs) {
+			auto it = sm.lower_bound(p[0]);
+			if (it == sm.end()) {
+				sm.insert(p[1]-1);
+				sm.insert(p[1]);
+			} else if (next(it) == sm.end()) {
+				sm.insert(p[1]);
+			}
 		}
-		return dfs(b, 0, hm, len, 0);
+
+		return sm.size();
 	}
 };
+
+// for data like
+// 1 2
+// 2 5
+// 4 5
+// if only ordered by `r`
+// then for the first pair, set has [1, 2]
+// second pair, [1, 2, 5]
+// but for the third, it will try to insert 5 again
+// but in fact it should insert 4 rather.
+//
+// If order by r then l
+// we will insert [1, 2], then [4, 5], ending up
+// with [1, 2, 4, 5], which is the final answer
