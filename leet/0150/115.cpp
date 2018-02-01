@@ -1,9 +1,3 @@
-#include <algorithm>
-#include <iostream>
-#include <string>
-#include <vector>
-using namespace std;
-
 class Solution {
 	public:
 	int numDistinct(string s, string t) {
@@ -21,10 +15,23 @@ class Solution {
 	}
 };
 
-int main() {
-	string s, t;
-	cin >> s >> t;
-	Solution sol;
-	cout << sol.numDistinct(s, t) << endl;
-	return 0;
-}
+/*
+new attempt
+class Solution {
+public:
+	int numDistinct(string s, string t) {
+		int slen = s.length(), tlen = t.length();
+		if (slen < tlen) { return 0; }
+		vector<vector<int>> dp(slen+1, vector<int>(tlen+1, 0));
+		for (int i=0; i<=slen; ++i) { dp[i][0] = 1; }
+		for (int i=0; i<slen; ++i) {
+			for (int j=0; j<tlen; ++j) {
+				dp[i+1][j+1] = dp[i][j+1];
+				if (s[i] == t[j]) { dp[i+1][j+1] += dp[i][j]; }
+			}
+		}
+
+		return dp[slen][tlen];
+	}
+};
+*/

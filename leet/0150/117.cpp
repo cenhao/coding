@@ -30,3 +30,26 @@ class Solution {
 		}
 	}
 };
+/*
+ * another attempt
+class Solution {
+	public:
+	void connect(TreeLinkNode *root) {
+		TreeLinkNode vh(0), *cur = root;
+		while (cur != nullptr) {
+			TreeLinkNode *nxt = &vh, *tmp = &vh;
+			for (auto *i=cur; i!=nullptr; i=i->next) {
+				if (i->left != nullptr) {
+					tmp->next = i->left;
+					tmp = tmp->next;
+				}
+				if (i->right != nullptr) {
+					tmp->next = i->right;
+					tmp = tmp->next;
+				}
+			}
+			cur = nxt->next; nxt->next = nullptr;
+		}
+	}
+};
+*/
