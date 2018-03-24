@@ -7,6 +7,7 @@ struct RandomListNode {
 	RandomListNode(int x) : label(x), next(NULL), random(NULL) {}
 };
 
+/*
 class Solution {
 	public:
 	RandomListNode *copyRandomList(RandomListNode *head) {
@@ -38,6 +39,31 @@ class Solution {
 		}
 
 		return clone;
+	}
+};
+*/
+
+class Solution {
+public:
+	RandomListNode *copyRandomList(RandomListNode *head) {
+		if (head == nullptr) { return head; }
+		for (RandomListNode *ptr=head; ptr!=nullptr; ptr=ptr->next) {
+			auto *tmp = new RandomListNode(ptr->label);
+			tmp->next = tmp->random = ptr->random;
+			ptr->random = tmp;
+		}
+		for (RandomListNode *ptr=head; ptr!=nullptr; ptr=ptr->next) {
+			auto *cur = ptr->random; // copy
+			cur->random = cur->random == nullptr ? nullptr : cur->random->random;
+		}
+		RandomListNode vh(0);
+		for (RandomListNode *ptr=head, *cur=&vh; ptr!=nullptr; ptr=ptr->next) {
+			cur = cur->next = ptr->random;
+			ptr->random = cur->next;
+			cur->next = ptr->next == nullptr ? nullptr : ptr->next->random;
+		}
+
+		return vh.next;
 	}
 };
 
