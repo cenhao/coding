@@ -1,40 +1,51 @@
-/**
- * Definition for a binary tree node.
- * struct TreeNode {
- *     int val;
- *     TreeNode *left;
- *     TreeNode *right;
- *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
- * };
- */
 class Solution {
 public:
-	int get_depth(TreeNode *cur) {
-		if (cur == nullptr) { return 0; }
-		return max(get_depth(cur->left), get_depth(cur->right)) + 1;
-	}
-	int get_cnt(TreeNode *cur, int td, int d) {
-		if (cur == nullptr) { return 0; }
-		if (d == td) { return 1; }
-		return get_cnt(cur->left, td, d+1) + get_cnt(cur->right, td, d+1);
-	}
-	int get(TreeNode *cur, int td, int d, int cnt, TreeNode **ans) {
-		if (cur == nullptr) { return 0; }
-		if (td == d) {
-			if (cnt == 1) { *ans = cur; }
-			return 1;
+	void gen(int cur, int len, vector<int> &p, string &buf, vector<int> &pp) {
+		if (cur >= (len+1)/2) {
+			int v = stoi(buf);
+			if (v == 1) { return; }
+			int stop = sqrt(v);
+			bool ok = true;
+			for (auto pv: p) {
+				if (pv > stop) { break; }
+				if (v % pv == 0) {
+					ok = false;
+					break;
+				}
+			}
+			if (ok) { pp.push_back(v); }
+			return;
 		}
-		int sm = get(cur->left, td, d+1, cnt, ans) + get(cur->right, td, d+1, cnt, ans);
-		if (cnt == sm && *ans == nullptr) { *ans = cur; }
-		return sm;
+		for (int i=cur==0?'1':'0'; i<='9'; ++i) {
+			buf[cur] = buf[len-cur-1] = i;
+			gen(cur+1, len, p, buf, pp);
+		}
 	}
+	int primePalindrome(int N) {
+		static bool init = false;
+		static vector<int> pp;
+		if (!init) {
+			init = true;
+			int sz = 10100;
+			vector<bool> is_prime(sz, true);
+			vector<int> p;
+			for (int i=2; i<sz; ++i) {
+				if (is_prime[i]) { p.push_back(i); }
+				for (int j=0; j<p.size() && i*p[j]/p[j]==i && i*p[j]<sz; ++j) {
+					is_prime[i*p[j]] = false;
+					if (i % p[j] == 0) { break; }
+				}
+			}
 
-    TreeNode* subtreeWithAllDeepest(TreeNode* root) {
-		if (root == nullptr) { return nullptr; }
-		int d = get_depth(root);
-		int cnt = get_cnt(root, d, 1);
-		TreeNode *ans = nullptr;
-		get(root, d, 1, cnt, &ans);
-		return ans;
-    }
+			for (int i=1; i<=7; ++i) {
+				string buf(i, ' ');
+				gen(0, i, p, buf, pp);
+			}
+			pp.push_back(100030001);
+			sort(pp.begin(), pp.end());
+		}
+
+		auto it = lower_bound(pp.begin(), pp.end(), N);
+		return *it;
+	}
 };
